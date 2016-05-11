@@ -3,6 +3,22 @@ import static org.junit.Assert.*;
 
 public class RecipeTest {
 
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
+
+  @Test
+  public void Recipe_instantiatesCorrectly_WithNameIngredientsDirections() {
+  	Recipe testRecipe = new Recipe("Chocolate Chip cookies", "cookie stuff", "make cookies");
+  	assertTrue(testRecipe instanceof Recipe);
+  	assertTrue(testRecipe.getName() == "Chocolate Chip cookies");
+  }
+  //
+  // @Test
+  // public void all_listEmptyAtFirst_true() {
+  // 	assertTrue(Recipe.all().size() == 0);
+  // }
+
+
   @Test
   public void save_savesRecipeToDatabase_true() {
     Recipe testRecipe = new Recipe("food", "list of great ingredients", "cook me");
