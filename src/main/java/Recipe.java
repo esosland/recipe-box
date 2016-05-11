@@ -29,6 +29,15 @@ public class Recipe {
 		}
 	}
 
+	public void delete() {
+		try(Connection con = DB.sql2o.open()) {
+			String sql = "DELETE FROM recipes WHERE id=:id";
+			con.createQuery(sql)
+				.addParameter("id", id)
+				.executeUpdate();
+		}
+	}
+
 	public static List<Recipe> all() {
 		String sql = "SELECT * FROM recipes";
 		try(Connection con = DB.sql2o.open()) {

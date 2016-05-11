@@ -12,11 +12,11 @@ public class TagTest {
   	assertTrue(testTag instanceof Tag);
   	assertTrue(testTag.getType() == "Dessert");
   }
-  //
-  // @Test
-  // public void all_listEmptyAtFirst_true() {
-  // 	assertTrue(Tag.all().size() == 0);
-  // }
+
+  @Test
+  public void all_listEmptyAtFirst_true() {
+  	assertTrue(Tag.all().size() == 0);
+  }
 
 
   @Test
@@ -27,9 +27,12 @@ public class TagTest {
     assertEquals(expected, "Dessert");
   }
 
-  // @Test
-  // public void function_testdescription_expected() {
-  //   Tamagotchi myPet = new Tamagotchi("lil dragon");
-  //   assertEquals("lil dragon", myPet.getName());
-  //}
+  @Test
+  public void delete_deletesTagFromDatabase_true() {
+    Tag testTag = new Tag("Dessert");
+    testTag.save();
+    testTag.delete();
+    assertTrue(Tag.all().isEmpty());
+  }
+
 }
