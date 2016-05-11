@@ -35,4 +35,20 @@ public class RecipeTest {
     assertTrue(Recipe.all().isEmpty());
   }
 
+  @Test
+  public void find_findsRecipeInDatabase_Recipe() {
+    Recipe testRecipe = new Recipe("food", "list of great ingredients", "cook me");
+    testRecipe.save();
+    Recipe savedRecipe = Recipe.find(testRecipe.getId());
+    assertTrue(savedRecipe.equals(testRecipe));
+  }
+
+  @Test
+  public void update_updatesRecipe_true() {
+    Recipe testRecipe = new Recipe("food", "list of great ingredients", "cook me");
+    testRecipe.save();
+    testRecipe.update("Chocolate Chip cookies", "cookie stuff", "make cookies");
+    assertEquals("Chocolate Chip cookies", Recipe.find(testRecipe.getId()).getName());
+  }
+
 }
