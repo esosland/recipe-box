@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 import org.sql2o.*;
 
 public class Recipe {
@@ -103,5 +104,34 @@ public class Recipe {
 		}
 	}
 
+	public void addTag(Tag tag) {
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "INSERT INTO recipes_tags (tag_id, recipe_id) VALUES (:tag_id, :recipe_id)";
+    con.createQuery(sql)
+      .addParameter("tag_id", tag.getId())
+      .addParameter("recipe_id", this.getId())
+      .executeUpdate();
+  }
+}
+
+public List<Tag> getTags() {
+  try(Connection con = DB.sql2o.open()){
+    String joinQuery = "SELECT tag_id FROM recipes_tags WHERE recipe_id = :recipe_id";
+    List<Integer> tagIds = con.createQuery(joinQuery)
+      .addParameter("recipe_id", this.getId())
+      .executeAndFetch(Integer.class);
+
+    List<Tag> tags = new ArrayList<Tag>();
+
+    for (Integer tagId : tagIds) {
+      String recipeQuery = "SELECT * FROM tags WHERE id = :tagId";
+      Tag tag = con.createQuery(recipeQuery)
+        .addParameter("tagId", tagId)
+        .executeAndFetchFirst(Tag.class);
+      tags.add(tag);
+    }
+    return tags;
+  }
+}
 
 }

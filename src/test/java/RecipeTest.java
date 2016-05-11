@@ -1,5 +1,6 @@
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.List;
 
 public class RecipeTest {
 
@@ -50,5 +51,40 @@ public class RecipeTest {
     testRecipe.update("Chocolate Chip cookies", "cookie stuff", "make cookies");
     assertEquals("Chocolate Chip cookies", Recipe.find(testRecipe.getId()).getName());
   }
+
+  @Test
+  public void addTag_addsTagToRecipe_true() {
+    Recipe myRecipe = new Recipe("Ramen", "ramen stuff", "make ramen");
+    myRecipe.save();
+    Tag myTag = new Tag("japanese");
+    myTag.save();
+    myRecipe.addTag(myTag);
+    Tag savedTag = myRecipe.getTags().get(0);
+    assertTrue(myTag.equals(savedTag));
+  }
+
+  @Test
+  public void addTag_addsTagToRecipe() {
+    Tag myTag = new Tag("japanese"); 
+    myTag.save();
+    Recipe myRecipe = new Recipe("Ramen", "ramen stuff", "make ramen");
+    myRecipe.save();
+    myRecipe.addTag(myTag);
+    Tag savedTag = myRecipe.getTags().get(0);
+    assertTrue(myTag.equals(savedTag));
+  }
+
+
+  @Test
+  public void getTags_returnsAllTags_List() {
+    Tag myTag = new Tag("japanese");
+    myTag.save();
+    Recipe myRecipe = new Recipe("Ramen", "ramen stuff", "make ramen");
+    myRecipe.save();
+    myRecipe.addTag(myTag);
+    List savedTags = myRecipe.getTags();
+    assertEquals(1, savedTags.size());
+  }
+
 
 }
