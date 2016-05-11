@@ -23,6 +23,15 @@ public class Tag {
 		}
 	}
 
+  public void delete() {
+		try(Connection con = DB.sql2o.open()) {
+			String sql = "DELETE FROM tags WHERE id=:id";
+			con.createQuery(sql)
+				.addParameter("id", id)
+				.executeUpdate();
+		}
+	}
+
 	public static List<Tag> all() {
 		String sql = "SELECT * FROM tags";
 		try(Connection con = DB.sql2o.open()) {
