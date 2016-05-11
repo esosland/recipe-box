@@ -82,25 +82,24 @@ public class Recipe {
 
 	public void update(String newName, String newIngredients, String newDirections) {
 		try(Connection con = DB.sql2o.open()) {
-			String nameUpdate = "UPDATE recipes SET name = :name WHERE id = :id";
-			String ingredientsUpdate = "UPDATE recipes SET ingredients = :ingredients WHERE id = :id";
-			String directionsUpdate = "UPDATE recipes SET directions = :directions WHERE id = :id";
+			String updateName = "UPDATE recipes SET name = :newName WHERE id = :id";
+			String updateIngredients = "UPDATE recipes SET ingredients = :newIngredients WHERE id = :id";
+			String updateDirections = "UPDATE recipes SET directions = :newDirections WHERE id = :id";
 
-			con.createQuery(nameUpdate)
-				.addParameter("name", name)
-				.addParameter("id", id)
+			con.createQuery(updateName)
+				.addParameter("newName", newName)
+				.addParameter("id", this.id)
 				.executeUpdate();
 
-			con.createQuery(ingredientsUpdate)
-				.addParameter("ingredients", ingredients)
-				.addParameter("id", id)
+			con.createQuery(updateIngredients)
+				.addParameter("newIngredients", newIngredients)
+				.addParameter("id", this.id)
 				.executeUpdate();
 
-			con.createQuery(directionsUpdate)
-				.addParameter("directions", directions)
-				.addParameter("id", id)
+			con.createQuery(updateDirections)
+				.addParameter("newDirections", newDirections)
+				.addParameter("id", this.id)
 				.executeUpdate();
-
 		}
 	}
 
