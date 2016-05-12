@@ -58,6 +58,24 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/recipes/:id", (request,response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Recipe recipe = Recipe.find(Integer.parseInt(request.params("id")));
+      model.put("recipe", recipe);
+      model.put("allTags", Tag.all());
+      model.put("template", "templates/recipe.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/tags/:id", (request,response) ->{
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Tag tag = Tag.find(Integer.parseInt(request.params("id")));
+      model.put("tag", tag);
+      model.put("allRecipes", Recipe.all());
+      model.put("template", "templates/tag.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
 
 
   }

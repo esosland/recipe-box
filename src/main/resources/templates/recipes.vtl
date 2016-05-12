@@ -3,17 +3,22 @@
 <ul>
 
 #foreach($recipe in $recipes)
-  <li>$recipe.getName()</li>
+  <li><a href="/recipes/$recipe.getId()">$recipe.getName()</a></li>
 #end
+</ul>
+
+<hr>
 
 <form action="/recipes" method="post">
-  <label for="name" >New Recipe Name</label>
-  <input id="name" type="text" name="name">
-  <label for="ingredients" >Ingredients</label>
-  <input id="ingredients" type="text" name="ingredients">
-  <label for="directions" >Directions</label>
-  <input id="directions" type="text" name="directions">
+  <div class="form-group">
+    <label for="name" >New Recipe Name</label>
+    <input id="name" class="form-control" type="text" name="name">
+    <label for="ingredients" >Ingredients</label>
+    <input id="ingredients" class="form-control" type="text" name="ingredients">
+    <label for="directions" >Directions</label>
+    <input id="directions" class="form-control" type="text" name="directions">
+  </div>
   <button type="submit" class="btn btn-primary" name="button">Add me!</button>
 </form>
 
-</ul>
+<p><a href="/">Home</a></p>

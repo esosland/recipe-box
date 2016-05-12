@@ -3,14 +3,19 @@
 <ul>
 
 #foreach($tag in $tags)
-  <li>$tag.getType()</li>
+  <li><a href="/tags/$tag.getId()">$tag.getType()</a></li>
 #end
+</ul>
+
+<hr>
 
 <form action="/tags" method="post">
-  <label for="tag" >New Tag</label>
-  <input id="tag" type="text" name="tag">
+  <div class="form-group">
+    <label for="tag" >New Tag</label>
+    <input id="tag" class="form-control" type="text" name="tag">
+  </div>
   <button type="submit" class="btn btn-primary" name="button">Add me!</button>
 </form>
 
 
-</ul>
+<p><a href="/">Home</a></p>

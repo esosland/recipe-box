@@ -1,0 +1,27 @@
+<h1>$tag.getType()</h1>
+
+#if($tag.getRecipes())
+  <p>Here are the recipes for this tag:</p>
+  <ul>
+    #foreach($recipe in $tag.getRecipes())
+      <li>$recipe.getName()</li>
+    #end
+  </ul>
+#end
+
+<h4>Add a recipe to this tag:</h4>
+
+<form action='/add_recipes' method='post'>
+  <input id="tag_id" name="tag_id" type="hidden" value="$tag.getId()">
+  <label for="recipe_id">Select a recipe</label>
+  <select id='recipe_id' name='recipe_id' type='text'>
+    #foreach($recipe in $allRecipes)
+      <option value="$recipe.getId()"> $recipe.getName() </option>
+    #end
+  </select>
+  <button type="submit" class="btn btn-info">Add recipe to this tag</button>
+</form>
+
+<p><a href="/tags/$tag.getId()/edit">Edit this tag</a></p>
+
+<p><a href="/">Home</a></p>

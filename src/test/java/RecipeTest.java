@@ -63,16 +63,6 @@ public class RecipeTest {
     assertTrue(myTag.equals(savedTag));
   }
 
-  @Test
-  public void addTag_addsTagToRecipe() {
-    Tag myTag = new Tag("japanese"); 
-    myTag.save();
-    Recipe myRecipe = new Recipe("Ramen", "ramen stuff", "make ramen");
-    myRecipe.save();
-    myRecipe.addTag(myTag);
-    Tag savedTag = myRecipe.getTags().get(0);
-    assertTrue(myTag.equals(savedTag));
-  }
 
 
   @Test
