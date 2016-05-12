@@ -2,15 +2,20 @@
 
 <h3>Tags for this recipe:</h3>
 <ul>
-  #foreach($tag in $allTags)
+  #foreach($tag in $recipe.getTags())
     <li>$tag.getType()</li>
   #end
 </ul>
 
-
-<form class="well" action="index.html" method="post">
-  <h2>this is the drop-down for adding a new tag</h2>
-  <button type="button" name="button">this button does nothing right now.</button>
+<form action='/add_tags' method='post'>
+  <input id="recipe_id" name="recipe_id" type="hidden" value="$recipe.getId()">
+  <label for="tag_id">Select a tag</label>
+  <select id='tag_id' name='tag_id' type='text'>
+    #foreach($tag in $allTags)
+      <option value="$tag.getId()"> $tag.getType() </option>
+    #end
+  </select>
+  <button type="submit" class="btn btn-info">Add tag to this recipe</button>
 </form>
 
 <h3>Ingredients:</h3>
@@ -18,3 +23,7 @@
 
 <h3>Directions:</h3>
 <p>$recipe.getDirections()</p>
+
+<p><a href="/recipes/$recipe.getId()/edit">Edit this recipe</a></p>
+
+<p><a href="/">Home</a></p>

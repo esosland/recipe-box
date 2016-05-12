@@ -76,6 +76,30 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/add_recipes", (request,response) ->{
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/tag.vtl");
+      Recipe recipe = Recipe.find(Integer.parseInt(request.queryParams("recipe_id")));
+      Tag tag = Tag.find(Integer.parseInt(request.queryParams("tag_id")));
+      tag.addRecipe(recipe);
+      model.put("tag", tag);
+      model.put("allRecipes", Recipe.all());
+
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/add_tags", (request,response) ->{
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/recipe.vtl");
+      Recipe recipe = Recipe.find(Integer.parseInt(request.queryParams("recipe_id")));
+      Tag tag = Tag.find(Integer.parseInt(request.queryParams("tag_id")));
+      tag.addRecipe(recipe);
+      model.put("recipe", recipe);
+      model.put("allTags", Tag.all());
+
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
 
 
   }

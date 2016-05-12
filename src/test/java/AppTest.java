@@ -57,4 +57,33 @@ public class AppTest extends FluentTest {
     submit(".btn");
     assertThat(pageSource()).contains("Rice");
   }
+
+  @Test
+  public void recipeIsAddedToTag() {
+    Tag testTag = new Tag("Dessert");
+    testTag.save();
+    Recipe testRecipe = new Recipe("Cake", "cake stuff", "make cake");
+    testRecipe.save();
+    String url = String.format("http://localhost:4567/tags/%d", testTag.getId());
+    goTo(url);
+    fillSelect("#recipe_id").withText("Cake");
+    submit(".btn");
+    assertThat(pageSource()).contains("<li>");
+    assertThat(pageSource()).contains("Dessert");
+  }
+
+  @Test
+  public void tagIsAddedToRecipe() {
+    Tag testTag = new Tag("Appetizer");
+    testTag.save();
+    Recipe testRecipe = new Recipe("Hummus", "hummus stuff", "mash it");
+    testRecipe.save();
+    String url = String.format("http://localhost:4567/recipes/%d", testRecipe.getId());
+    goTo(url);
+    fillSelect("#tag_id").withText("Appetizer");
+    submit(".btn");
+    assertThat(pageSource()).contains("<li>");
+    assertThat(pageSource()).contains("Appetizer");
+  }
+
 }
