@@ -6,4 +6,14 @@
   <li>$recipe.getName()</li>
 #end
 
+<form action="/recipes" method="post">
+  <label for="name" >New Recipe Name</label>
+  <input id="name" type="text" name="name">
+  <label for="ingredients" >Ingredients</label>
+  <input id="ingredients" type="text" name="ingredients">
+  <label for="directions" >Directions</label>
+  <input id="directions" type="text" name="directions">
+  <button type="submit" class="btn btn-primary" name="button">Add me!</button>
+</form>
+
 </ul>

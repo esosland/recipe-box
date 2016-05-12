@@ -42,8 +42,19 @@ public class AppTest extends FluentTest {
   public void tagIsCreatedTest() {
     goTo("http://localhost:4567/");
     click("a", withText("Tags"));
-    fill("#name").with("Desserts");
+    fill("#tag").with("Desserts");
     submit(".btn");
     assertThat(pageSource()).contains("Desserts");
+  }
+
+  @Test
+  public void recipeIsAddedTest() {
+    goTo("http://localhost:4567/");
+    click("a", withText("Recipes"));
+    fill("#name").with("Rice");
+    fill("#ingredients").with("Uncooked rice and water");
+    fill("#directions").with("turn on rice cooker. ???. Profit.");
+    submit(".btn");
+    assertThat(pageSource()).contains("Rice");
   }
 }

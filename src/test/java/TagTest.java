@@ -9,9 +9,9 @@ public class TagTest {
 
   @Test
   public void Tag_instantiatesCorrectly_WithType() {
-  	Tag testTag = new Tag("Dessert");
+  	Tag testTag = new Tag("New Tag");
   	assertTrue(testTag instanceof Tag);
-  	assertTrue(testTag.getType() == "Dessert");
+  	assertTrue(testTag.getType() == "New Tag");
   }
 
   @Test
